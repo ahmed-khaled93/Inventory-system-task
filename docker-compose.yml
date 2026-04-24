@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  app:
+    user: "1000:1000"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: inventory_app
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - db
+      - redis
+
+  nginx:
+    image: nginx:alpine
+    container_name: inventory_nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d
+    depends_on:
+      - app
+
+  db:
+    image: postgres:15
+    container_name: inventory_db
+    restart: always
+    environment:
+      POSTGRES_DB: inventory
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:alpine
+    container_name: inventory_redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  dbdata:
