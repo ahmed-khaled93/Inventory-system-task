@@ -11,15 +11,8 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Http\Requests\AdjustStockRequest;
 use App\Http\Resources\ProductResource;
 use Illuminate\Support\Facades\Cache;
-use OpenApi\Annotations as OA;
 
-/**
- * @OA\Info(
- *     title="Inventory API",
- *     version="1.0.0",
- *     description="API documentation"
- * )
- */
+
 class ProductController extends Controller
 {
 
@@ -30,23 +23,7 @@ class ProductController extends Controller
         $this->productsRepository = $productsRepository;
     }
 
-    /**
-     * @OA\Get(
-     * path="/api/test",
-     * operationId="getTestList",
-     * tags={"Test"},
-     * summary="Get list of tests",
-     * description="Returns list of tests",
-     * @OA\Response(
-     * response=200,
-     * description="Successful operation",
-     * ),
-     * @OA\Response(
-     * response=401,
-     * description="Unauthenticated",
-     * )
-     * )
-     */
+
     public function index()
     {
         $page = request('page', 1);
