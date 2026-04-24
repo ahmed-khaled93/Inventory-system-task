@@ -32,7 +32,7 @@ A production-ready Inventory Management API built with Laravel, Docker, PostgreS
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/ahmed-khaled93/Inventory-system-task.git
 cd inventory-service
 ```
 
